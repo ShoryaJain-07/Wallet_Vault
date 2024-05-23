@@ -15,8 +15,7 @@ const MarketCard = ({
   price,
   change1hr,
   change24hr,
-  marketvalue,
-}: string) => {
+}) => {
   return (
     <Dialog>
       <DialogTrigger className="m-6">
