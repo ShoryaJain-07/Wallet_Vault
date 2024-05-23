@@ -75,10 +75,11 @@ const Page = () => {
   console.log(bal);
 
   // if (status) {
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     setIsloading(true);
     e.preventDefault();
-    setAddress(e.target[0].value);
+    console.log(e.currentTarget[0].value)
+    setAddress(e.currentTarget[0].value);
   };
 
   if (isloading) {
