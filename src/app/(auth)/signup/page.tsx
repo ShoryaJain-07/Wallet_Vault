@@ -3,7 +3,7 @@ import { signIn, useSession } from 'next-auth/react';
 import { redirect } from "next/navigation";
 import React from 'react'
 
-const page = () => {
+const Page = () => {
     const session = useSession();
 
     if(session.data){
@@ -27,4 +27,4 @@ const page = () => {
   );
 }
 
-export default page
+export default Page

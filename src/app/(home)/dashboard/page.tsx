@@ -22,7 +22,7 @@ import { useAppDispatch, useAppSelector } from "@/app/hook";
 import { setIsConn } from "@/features/isConn/isConnSlice";
 import { setSession } from "@/features/session/sessionSlice";
 
-const page = () => {
+const Page = () => {
   const dispatch = useAppDispatch();
   const session = useSession();
   dispatch(setSession(!!session.data));
@@ -196,4 +196,4 @@ const page = () => {
   // }
 };
 
-export default page;
+export default Page;

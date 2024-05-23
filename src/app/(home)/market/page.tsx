@@ -15,7 +15,7 @@ import { motion } from "framer-motion";
 import { useAppDispatch } from "@/app/hook";
 import { setSession } from "@/features/session/sessionSlice";
 
-const page = () => {
+const Page = () => {
 const dispatch = useAppDispatch();
 const session = useSession();
 dispatch(setSession(!!session.data));
@@ -93,8 +93,9 @@ if (session.data === null) {
                 }}
                 className="flex items-center justify-between gap-[30px]"
               >
-                {coins.map((coin) => (
+                {coins.map((coin,index) => (
                   <MarketCard
+                    key={index}
                     name={coin.name}
                     price={coin.current_price}
                     image={coin.image}
@@ -108,8 +109,9 @@ if (session.data === null) {
         </Carousel>
         <div className="w-full flex flex-wrap justify-center">
           <div></div>
-          {coins.map((coin) => (
+          {coins.map((coin,index) => (
             <MarketCard
+            key={index}
               name={coin.name}
               price={coin.current_price}
               image={coin.image}
@@ -123,4 +125,4 @@ if (session.data === null) {
   }
 };
 
-export default page;
+export default Page;
