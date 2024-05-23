@@ -168,7 +168,7 @@ const Page = () => {
                       }}
                       className="flex items-center justify-between gap-[30px]"
                     >
-                      {transactiona.map((transItem, index) => (
+                      {transactiona.map((transItem:any, index) => (
                         <TransactionCard
                           key={index}
                           senderId={transItem.from as string}

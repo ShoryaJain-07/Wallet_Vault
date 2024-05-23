@@ -10,7 +10,7 @@ import {
 import { weiValue } from '@/constants';
 
 
-const TransactionCard = ({senderId, receiverId, amount, hash, timestamp, status}) => {
+const TransactionCard = ({senderId, receiverId, amount, hash, timestamp, status}:any) => {
   return (
     <Dialog>
       <DialogTrigger className='z-0'>

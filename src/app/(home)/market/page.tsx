@@ -93,7 +93,7 @@ if (session.data === null) {
                 }}
                 className="flex items-center justify-between gap-[30px]"
               >
-                {coins.map((coin,index) => (
+                {coins.map((coin:any,index) => (
                   <MarketCard
                     key={index}
                     name={coin.name}
@@ -109,7 +109,7 @@ if (session.data === null) {
         </Carousel>
         <div className="w-full flex flex-wrap justify-center">
           <div></div>
-          {coins.map((coin,index) => (
+          {coins.map((coin:any,index) => (
             <MarketCard
             key={index}
               name={coin.name}
