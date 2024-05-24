@@ -1,6 +1,6 @@
-'use client'
+"use client";
 import { useSession, signIn, signOut } from "next-auth/react";
-import { redirect } from 'next/navigation'
+import { redirect } from "next/navigation";
 
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -18,43 +18,47 @@ import { setSession } from "@/features/session/sessionSlice";
 
 export default function Home() {
   const session = useSession();
-  console.log(session)
-  
-  if(session.data === null){
+  console.log(session);
+
+  const [coins, setCoins] = useState([]);
+  const [isloading, setIsloading] = useState(true);
+  const [err, setErr] = useState(false);
+
+  if (session.data === null) {
     // redirect("/signup")
-    const session = useSession();
+    // const session = useSession();
 
-    if(session.data){
-        redirect('/market')
-    }
+    // if(session.data){
+    //     redirect('/market')
+    // }
 
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-gradient-to-r from-black from-0% via-slate-800 via-50% to-black">
-      <div className="w-76 md:w-96 rounded-xl text-white p-2 bg-[#101010] shadow-primary shadow-white">
-        <div className="w-full font-sans text-2xl md:text-3xl text-center font-bold">
-          Welcome to WalletVault!
+    return (
+      <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-gradient-to-r from-black from-0% via-slate-800 via-50% to-black">
+        <div className="w-76 md:w-96 rounded-xl text-white p-2 bg-[#101010] shadow-primary shadow-white">
+          <div className="w-full font-sans text-2xl md:text-3xl text-center font-bold">
+            Welcome to WalletVault!
+          </div>
+          <div className="mt-4 text-sm p-4 md:text-lg text-center">
+            To access your transaction details{" "}
+            <button
+              onClick={() => signIn()}
+              className="text-teal-500 font-bold"
+            >
+              signup
+            </button>
+          </div>
         </div>
-        <div className="mt-4 text-sm p-4 md:text-lg text-center">
-          To access your transaction details{" "}
-          <button onClick={() => signIn()} className="text-teal-500 font-bold">
-            signup
-          </button>
-        </div>
-      </div>
-    </main>
+      </main>
     );
   } else {
     // redirect("/market")
-    const dispatch = useAppDispatch();
-    const session = useSession();
-    dispatch(setSession(!!session.data));
+    // const dispatch = useAppDispatch();
+    // const session = useSession();
+    // dispatch(setSession(!!session.data));
 
-    if (session.data === null) {
-      redirect("/signup");
-    }
-    const [coins, setCoins] = useState([]);
-    const [isloading, setIsloading] = useState(true);
-    const [err, setErr] = useState(false);
+    // if (session.data === null) {
+    //   redirect("/signup");
+    // }
 
     const options = {
       method: "GET",
@@ -153,7 +157,4 @@ export default function Home() {
       );
     }
   }
-    
-  
-  
 }
