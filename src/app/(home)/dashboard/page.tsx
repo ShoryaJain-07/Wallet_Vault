@@ -36,6 +36,9 @@ const Page = () => {
   const [bal, setBal] = useState<number>(0);
   const [address, setAddress] = useState(`${modal.getAddress()}`);
   const [transactiona, setTransactiona] = useState([]);
+  const [transaction1, setTransaction1] = useState([]);
+  const [transaction2, setTransaction2] = useState([]);
+  const [transaction3, setTransaction3] = useState([]);
   const [err, setErr] = useState(false);
 
   useEffect(() => {
@@ -56,7 +59,7 @@ const Page = () => {
 
     axios
       .get(
-        `https://api.etherscan.io/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&page=1&offset=10&sort=desc&apikey=${process.env.NEXT_PUBLIC_ETHERSCAN_API_KEY}`
+        `https://api.etherscan.io/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&page=1&offset=30&sort=desc&apikey=${process.env.NEXT_PUBLIC_ETHERSCAN_API_KEY}`
       )
       .then((res) => {
         setTransactiona(res.data.result);
@@ -71,7 +74,7 @@ const Page = () => {
     setStatus(modal.getIsConnected());
   }, [address]);
 
-  console.log(transactiona[0]);
+  console.log(transactiona);
   console.log(bal);
 
   // if (status) {
@@ -154,11 +157,11 @@ const Page = () => {
           <div>
             {transactiona.length > 0 ? (
               <Carousel>
-                <CarouselContent className="w-[80vw]">
-                  <CarouselItem>
+                <CarouselContent className="w-[80vw] md:w-[70vw] mx-auto h-screen">
+                  <CarouselItem className="flex justify-center gap-[20px] md:px-20">
                     <motion.div
                       animate={{
-                        x: ["-100%", "0%", "-100%"],
+                        y: ["-100%", "0%", "-100%"],
                         transition: {
                           ease: "linear",
                           duration: 20,
@@ -166,19 +169,73 @@ const Page = () => {
                           repeatType: "loop",
                         },
                       }}
-                      className="flex items-center justify-between gap-[30px]"
+                      className="flex flex-col items-center justify-between gap-[30px]"
                     >
-                      {transactiona.map((transItem:any, index) => (
-                        <TransactionCard
-                          key={index}
-                          senderId={transItem.from as string}
-                          receiverId={transItem.to as string}
-                          amount={transItem.value as string}
-                          hash={transItem.hash as string}
-                          timestamp={transItem.timeStamp as string}
-                          status={transItem.isError as string}
-                        />
-                      ))}
+                      {transactiona
+                        .slice(0, 10)
+                        .map((transItem: any, index) => (
+                          <TransactionCard
+                            key={index}
+                            senderId={transItem.from as string}
+                            receiverId={transItem.to as string}
+                            amount={transItem.value as string}
+                            hash={transItem.hash as string}
+                            timestamp={transItem.timeStamp as string}
+                            status={transItem.isError as string}
+                          />
+                        ))}
+                    </motion.div>
+                    <motion.div
+                      animate={{
+                        y: ["0%", "-100%", "0%"],
+                        transition: {
+                          ease: "linear",
+                          duration: 20,
+                          repeat: Infinity,
+                          repeatType: "loop",
+                        },
+                      }}
+                      className="flex flex-col items-center justify-between gap-[30px]"
+                    >
+                      {transactiona
+                        .slice(10, 20)
+                        .map((transItem: any, index) => (
+                          <TransactionCard
+                            key={index}
+                            senderId={transItem.from as string}
+                            receiverId={transItem.to as string}
+                            amount={transItem.value as string}
+                            hash={transItem.hash as string}
+                            timestamp={transItem.timeStamp as string}
+                            status={transItem.isError as string}
+                          />
+                        ))}
+                    </motion.div>
+                    <motion.div
+                      animate={{
+                        y: ["-100%", "0%", "-100%"],
+                        transition: {
+                          ease: "linear",
+                          duration: 20,
+                          repeat: Infinity,
+                          repeatType: "loop",
+                        },
+                      }}
+                      className="flex flex-col items-center justify-between gap-[30px]"
+                    >
+                      {transactiona
+                        .slice(20, 30)
+                        .map((transItem: any, index) => (
+                          <TransactionCard
+                            key={index}
+                            senderId={transItem.from as string}
+                            receiverId={transItem.to as string}
+                            amount={transItem.value as string}
+                            hash={transItem.hash as string}
+                            timestamp={transItem.timeStamp as string}
+                            status={transItem.isError as string}
+                          />
+                        ))}
                     </motion.div>
                   </CarouselItem>
                 </CarouselContent>
