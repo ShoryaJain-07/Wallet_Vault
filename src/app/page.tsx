@@ -24,6 +24,42 @@ export default function Home() {
   const [isloading, setIsloading] = useState(true);
   const [err, setErr] = useState(false);
 
+  const options = {
+    method: "GET",
+    url: "https://api.coingecko.com/api/v3/coins/markets",
+    params: {
+      vs_currency: "usd",
+      ids: "ethereum",
+      category: "layer-1",
+      order: "id_asc",
+      per_page: "100",
+      page: "1",
+      sparkline: "false",
+      price_change_percentage: "1h",
+      locale: "en",
+      precision: "4",
+    },
+    headers: {
+      accept: "application/json",
+      "x-cg-demo-api-key": "CG-qZz624WkwNjzx88jrzkt9cGw",
+    },
+  };
+
+  useEffect(() => {
+      axios
+        .request(options)
+        .then(function (response) {
+          console.log(response.data);
+          setCoins(response.data);
+          setIsloading(false);
+        })
+        .catch(function (error) {
+          setIsloading(false);
+          setErr(true);
+          console.error(error);
+        });
+    }, []);
+
   if (session.data === null) {
     // redirect("/signup")
     // const session = useSession();
@@ -60,41 +96,9 @@ export default function Home() {
     //   redirect("/signup");
     // }
 
-    const options = {
-      method: "GET",
-      url: "https://api.coingecko.com/api/v3/coins/markets",
-      params: {
-        vs_currency: "usd",
-        ids: "ethereum",
-        category: "layer-1",
-        order: "id_asc",
-        per_page: "100",
-        page: "1",
-        sparkline: "false",
-        price_change_percentage: "1h",
-        locale: "en",
-        precision: "4",
-      },
-      headers: {
-        accept: "application/json",
-        "x-cg-demo-api-key": "CG-qZz624WkwNjzx88jrzkt9cGw",
-      },
-    };
+    
 
-    useEffect(() => {
-      axios
-        .request(options)
-        .then(function (response) {
-          console.log(response.data);
-          setCoins(response.data);
-          setIsloading(false);
-        })
-        .catch(function (error) {
-          setIsloading(false);
-          setErr(true);
-          console.error(error);
-        });
-    }, []);
+    
 
     if (isloading) {
       return (
